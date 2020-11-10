@@ -1,0 +1,166 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% Formating commands
+
+\newcommand{\nl}{\newline}
+\newcommand{\jump}{\nl\nl}
+\newcommand{\paren}[1]{\left({} #1 \right)}
+\newcommand{\bracket}[1]{\left\{ #1 \right\}}
+\newcommand{\sbracket}[1]{\left[{} #1 \right]}
+\newcommand{\angbracket}[1]{\left\langle{} #1 \right\rangle}
+
+\newcommand{\ol}[1]{\overline{#1}}
+\newcommand{\ul}[1]{\underline{#1}}
+\newcommand{\ob}[1]{\overbrace{#1}}
+\newcommand{\ub}[1]{\underbrace{#1}}
+
+\newcommand{\pow}[2]{#1^{#2}}
+\newcommand{\sub}[2]{#1_{#2}}
+\newcommand{\powsub}[3]{#1^{#2}_{#3}}
+\newcommand{\subpow}[3]{#1^{#3}_{#2}}
+
+\renewcommand{\phi}{\varphi}
+\renewcommand{\epsilon}{\varepsilon}
+
+%%% Math symbols
+
+\renewcommand{\inf}{\infty}
+\newcommand{\pinf}{+\infty}
+\newcommand{\minf}{-\infty}
+\newcommand{\Rn}{\R^n}
+\newcommand{\Rm}{\R^m}
+\newcommand{\Rp}{\R^p}
+\newcommand{\Rtwo}{\R^2}
+\newcommand{\Rthree}{\R^3}
+\newcommand{\inv}{^{-1}}
+
+%% Calculus
+
+\newcommand{\abs}[1]{\left| #1 \right|}
+
+\newcommand{\dlim}{\displaystyle\lim}
+\newcommand{\slim}[2][x]{\sub{\dlim}{#1 \to{} #2}}
+\newcommand{\nlim}{\slim[n]{\pinf}{}}
+
+\newcommand{\deriv}[2][x]{\dfrac{d{#2}}{d{#1}}}
+\newcommand{\fn}[1]{\pow{f}{(#1)}}
+\newcommand{\parderiv}[2][f]{\dfrac{\partial{} {#1} }{\partial{} {#2} }}
+\newcommand{\parx}{\parderiv{x}}
+\newcommand{\pary}{\parderiv{y}}
+
+\newcommand{\dint}{\displaystyle\int}
+\newcommand{\spint}[2]{\subpow{\dint}{#1}{#2}}
+\newcommand{\psint}[2]{\powsub{\dint}{#1}{#2}}
+
+\newcommand{\dsum}{\displaystyle\sum}
+\newcommand{\spsum}[2]{\subpow{\dsum}{#1}{#2}}
+\newcommand{\pssum}[2]{\powsub{\dsum}{#1}{#2}}
+\newcommand{\serie}[2][n]{\subpow{\dsum}{#1 = #2}{\pinf}}
+
+\newcommand{\dprod}{\displaystyle\prod}
+\newcommand{\spprod}[2]{\subpow{\dprod}{#1}{#2}}
+\newcommand{\psprod}[2]{\powsub{\dprod}{#1}{#2}}
+
+\newcommand{\poly}[3][x]{{#2}_0 + {#2}_1 #1 + \cdots + {#2}_{#3} {#1}^{#3}}
+\newcommand{\sumpoly}[2][x]{\sum_{i=0}^n{#2}_i{#1}^i}
+\newcommand{\dsumpoly}[2][x]{\displaystyle\sumpoly[#1]{#2}}
+
+%%% Discrete Math
+
+\newcommand{\divi}{\mid}
+\newcommand{\notdivi}{\nmid}
+\newcommand{\normalgroup}{\triangleleft}
+\newcommand{\normalgroupeq}{\trianglelefteq}
+\newcommand{\ceil}[1]{\left\lceil{} #1 \right\rceil}
+\newcommand{\floor}[1]{\left\lfloor{} #1 \right\rfloor}
+\newcommand{\mdc}{\textrm{mdc}}
+\newcommand{\mmc}{\textrm{mmc}}
+\newcommand{\dmax}{\displaystyle\max}
+\newcommand{\dmin}{\displaystyle\min}
+\newcommand{\Zmod}[1]{\mathbb{Z}/#1\mathbb{Z}}
+\newcommand{\class}[1]{\sqrtbracket{#1}}
+\newcommand{\irr}{\textrm{Irr}}
+
+%%% Set theory
+
+\newcommand{\set}[1]{\bracket{\ #1\ }}
+\newcommand{\st}{\ | \ }
+\newcommand{\cardinal}[1]{\big| \, #1 \,\big| }
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\I}{\mathbb{I}}
+\newcommand{\myin}[1]{\in{} #1}
+\newcommand{\inR}{\myin{\R}}
+\newcommand{\inZ}{\myin{\Z}}
+\newcommand{\inQ}{\myin{\Q}}
+\newcommand{\inN}{\myin{\N}}
+\newcommand{\inC}{\myin{\C}}
+\newcommand{\inI}{\myin{\I}}
+
+\newcommand{\union}{\displaystyle\bigcup}
+\newcommand{\spunion}[2]{\subpow{\union}{#1}{#2}}
+\newcommand{\psunion}[2]{\powsub{\union}{#1}{#2}}
+\newcommand{\inter}{\displaystyle\bigcap}
+\newcommand{\spinter}[2]{\subpow{\inter}{#1}{#2}}
+\newcommand{\psinter}[2]{\powsub{\inter}{#1}{#2}}
+
+\newcommand{\img}{\textrm{Im }}
+
+%%% Geometry
+
+\newcommand{\pair}[2]{\paren{#1,~#2}}
+\newcommand{\inner}[2]{\angbracket{\ #1 \ , \ #2 \ }}
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+
+%% Boolean Algebra
+\newcommand{\xor}{\oplus}
+
+%%% Theorems environments
+
+\theoremstyle{definition}
+\newtheorem{defi}{Definição}
+
+\theoremstyle{plain}
+\newtheorem{teo}{Teorema}
+
+\theoremstyle{plain}
+\newtheorem{prop}{Proposição}
+
+\theoremstyle{definition}
+\newtheorem*{dem}{Demonstração}
+
+\theoremstyle{plain}
+\newtheorem{lema}{Lema}
+
+\theoremstyle{plain}
+\newtheorem{corol}{Corolário}
+
+\theoremstyle{definition}
+\newtheorem*{obs}{Observação}
+
+\theoremstyle{definition}
+\newtheorem*{exemplo}{Exemplo}
+
+\theoremstyle{definition}
+\newtheorem*{exercicio}{Exercício}
+
+\theoremstyle{plain}
+\newtheorem*{problema}{Problema}
+
+\theoremstyle{definition}
+\newtheorem*{nota}{Notação}
+
+\theoremstyle{definition}
+\newtheorem{metodo}{Método}
+
+%% Misc
+
+\newcommand{\cqd}{\ \blacksquare}
+\newcommand{\then}{\Rightarrow}
+\renewcommand{\iff}{\Leftrightarrow}
+\newcommand{\ida}{\textbf{($\Rightarrow$)}~}
+\newcommand{\volta}{\textbf{($\Leftarrow$)}~}
