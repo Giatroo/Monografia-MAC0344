@@ -3,6 +3,7 @@
 \documentclass[12pt, a4paper, oneside]{article}
 
 \input{packages.tex}
+\usepackage{csquotes}
 \input{macros.tex}
 
 \title{Side-Channel Attack}
@@ -21,21 +22,92 @@
 \maketitle
 \newpage
 
-\section*{Introdução}
+\section{Introdução}
+
+Side-Channel Attacks, que do inglês significa, Ataque por Canal Lateral são
+jeitos explorar vunerabilidades físicas de componentes eletrônicos, como a CPU
+de um computador.
+
+O nome vem do fato deles não atacarem "pela porta da frente", mas sim algum
+"rastro" físico que um componente deixa ao fazer determinadas ações.
+
+Um SCA não necessariamente tem a ver com componentes eletrônicos, pois podemos,
+por exemplo, descifrar uma senha de alguém captando os sons do teclado. Em
+geral, o SCA ataca um ponto fraco de um componente que não tem nada a ver com o
+seu funcionamento em si (como no exemplo do teclado, o teclado teoricamente não
+tem a responsabilidade de deixar os barulhos de cada tecla iguaizinhos). Daí
+então o nome \textit{canal lateral}.
+% TODO: Explicar melhor o que é side channel <18-11-20, Lucas> %
+
+Os dois principais SCA, que tornaram o ``ramo'' famoso foram o \textit{Meltdown}
+e o \textit{Spectre}, descobertos por independentemente por uma série de
+pesquisadores, mas destacando-se o grupo Project Zero da
+Google~\cite{Lipp2018meltdown}.
+
+Entretanto, existem muitas classes de SCA, como ataques ao cache (que é o caso
+dos dois exemplos citados), ataques que monitoram a energia consumida pelo
+computador, ataques que monitoram o eletromagnetismo eminido, ataques que
+monitoram o som emitido (como o exemplo do teclado), ataques que recuperam dados
+excluidos do disco entre muitos outros.
 
 \newpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section*{Desenvolvimento}
+\section{História} % julia
+
+Primeira pessoa a usar o termo (Side Channel Cryptanalysis of Product Ciphers)
+Primeiro ataque descoberto (TEMPEST 1942)
+Popularização do termo
+Mais descobertas de ataques
 
 \newpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section*{Conclusão}
+\section{Classificações de Side-Channel Attacks} % lucas
+
+
+\subsection{Classificação por (?)} % se é passivo ou ativo
+
+\subsection{Classificação por grau da invasão} % residual integrity (melhorar dps)
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Exemplos de Side-Channel Attacks}
+
+\subsection{Meltdown} % lucas
+
+Teste citando \cite{Lipp2018meltdown}
+\subsection{Spectre} % leo
+\subsection{CacheOut} % leo
+\subsection{SGAxe} % lucas
+\subsection{ZombieLoad} % julia
+\subsection{Foreshadow} % julia
 
 \newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Há jeito de se previmir?}
+
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Há como saber se estou sofrendo um SCA?}
+
+No. =(=
+
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Conclusão}
+
+\newpage
+
+\printbibliography
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
