@@ -78,7 +78,92 @@ Mais descobertas de ataques
 
 \subsection{Meltdown} % lucas
 
-Teste citando \cite{Lipp2018meltdown}
+Meltdown é um SCA relacionado ao processador e a um efeito colateral da execução
+fora-de-ordem feita por ele. Graças a ela, o Meltdown consegue quebrar a
+hierarquia entre o \textit{espaço do usuário} e o \textit{espaço do núcleo},
+podendo ler informações que não deveriam ser acessíveis por qualquer usuário,
+como senhas e dados pessoais.
+
+Atualmente, o principal mecanismo de defesa de qualquer sistema operacional é a
+\textit{isolação da memória}, dividindo a memória principal entre os diversos
+processos em andamento de forma que as regiões de memória em uso por um não
+possam ser acessadas por outros.
+
+Para conseguir isso e outras propriedades importantes do Sistema Operacional,
+ele se utiliza da chamada \textit{memória virtual}, que é uma abstração para a
+memória física. Essa memória virtual é divide em páginas de memória que podem
+ser individualmente mapeadas em regiões da memória física através de uma
+\textit{tabela de tradução de páginas}.
+
+Essa tabela não só tem como função mapear as páginas de memória, mas também
+dividi-las entre as páginas que pertecem ao usuário e às que pertencem ao núcleo
+(e daí surgem os termos \textit{espaço do usuário} e \textit{espaço do núcleo}).
+
+Através da tabela, o SO garante que o usuário não conseguirá acessar espaços de
+acesso restrito ao núcleo. Entretanto, o núcleo pode e deve ter acesso a toda a
+memória física em si (inclusive a parte em que se mapeam as páginas de usuário).
+Isso significa na prática que dentro da memória virtual do núcleo, existe uma
+região que mapea toda a memória física, permitindo que o núcleo altere posições
+de memória do usuário quando ele faz chamadas ao sistema.
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.9]{Res/virtual_memory_mapping.png}
+\caption{A memória física é completamente mapeada pelo núcleo em um certo ponto
+da sua memória virtual. Os endreços físicos (em azul) são mapeados pelo usuário,
+mas também pelo núcleo, sendo acessível pelos dois com eficiência.}
+\label{virtual_memory_mapping}
+\end{figure}
+
+Além disso, outro mecanismo crucial de defesa é a separação entre o
+\textit{espaço do usuário} e o \textit{espaço do núcleo}, ou seja, uma divisão
+entre quais processos (e quais partes da memória) pertencem a processos do
+usuário e quais pertencem ao sistema operacional em si.
+
+Essa divisão é tipicamente realizada por um bit supervisor do processador que
+define se uma página de memória do núcleo pode ou não ser acessada. E a ideia
+por trás desse bit é que ele será mudado para $1$ quando um processo precisa
+fazer chamadas ao sistemas (\textit{syscalls}), portanto parando de executar
+código do usuário e passando a executar código do núcleo, e mudado novamente
+para $0$ quando saímos do modo núcleo.
+
+Esse bit é utilizado com uma ideia de eficiência, pois permite que o SO mapeie o
+núcleo no espaço de endereço do processo que fez a \textit{syscall}.
+Consequentemente, não há nenhuma mudança no mapeamento da memória quando mudamos
+do modo usuário para o modo núcleo (o que é crucial para garantir mais
+velocidade).
+
+O Meltdown explora uma vunerabilidade causa pela \textit{execução fora-de-ordem}
+para ler dados mapeados no espaço de endereço do núcleo, o que inclui a memória
+física inteira em sistemas Linux, Android e OS X e uma grande parte da memória
+física em ambientes Windows.
+
+As CPUs modernas possuem essa técnica de otimização chamada de \textit{execução
+fora-de-ordem} que permite que os núcleos passem mais tempo trabalhando, mesmo
+quando uma determinada operação precisa esperar algum recurso (por exemplo,
+trazer um valor da memória). Basicamente, o que acontece é que ao invés de a CPU
+executar as instruções sequenciamente, ela vai as executando assim que todos os
+recursos necessários para uma determinada instrução estiverem disponíveis.
+
+Na prática, isso significa que a CPU \textit{especula} que uma determina
+instrução será executada no futuro e, então, faz a sua execução antes mesmo de
+ter certeza disso. O desenvolvedor do algoritmo que possibilitou a
+\textit{execução fora-de-ordem} foi Tomasulo em
+1967~\cite{Tomasulo1967outoforder}.
+
+% TODO: Pensar se explica como é implementada a execução fora de ordem em um
+% procesador Intel. Daí colocar a foto igual no artigo <24-11-20, Lucas> %
+
+A vunerabilidade encontrada pelo Meltdown se deve ao fato de que ao tentar
+executar uma instrução de acessar uma região de memória que não pertence ao
+programa, a \textit{execução fora-de-ordem} acabará fazendo o acesso e
+armazenando o valor no \textit{cache}. Apenas depois que esse dado é armazenado
+no \textit{cache}, a CPU percebe que a instrução não deveria ser executada e
+não de fato entrega esse valor ao programa que solicitou. Contudo, como o dado
+está em cache, o programa pode fazer um \textit{ataque ao cache} para recuperar
+essa informação, acessando, portanto, uma região da memória que não pertence ao
+programa atacante.
+
 \subsection{Spectre} % leo
 \subsection{CacheOut} % leo
 \subsection{SGAxe} % lucas
