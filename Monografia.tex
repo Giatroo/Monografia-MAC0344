@@ -20,7 +20,6 @@
 \begin{document}
 
 \maketitle
-\newpage
 
 \section{Introdução}
 
@@ -67,10 +66,75 @@ Mais descobertas de ataques
 
 \section{Classificações de Side-Channel Attacks} % lucas
 
+Na classificação mais clássica de Side-Channel Attacks, temos que eles podem ser
+classificados quanto a duas categorias:
+\begin{enumerate}
+\item Invasivo \textit{vs.} não-invasivo: Ataques invasivos são aqueles que
+abrem o aparelho sobre ataque. Um exemplo disso é conectar um cabo a um
+barramento do computador para ver os dados transferidos por aquele barramento.
+Os ataques invasivos por sua vez podem ser subdividos em
+\textbf{completamente invasivos} ou \textbf{parcialmente invasivos}. Os
+parcialmente invasivos são aqueles que deixam o componente intacto após o
+ataque, enquanto os completamente invasivos são aqueles que danificam o
+componente para que o ataque possa ser realizado.
+\item Ativo \textit{vs.} passivo: Os ataques passivos são aqueles que se
+restringem a observar os comportamentos de um dispositivo para realizar o
+ataque, enquanto os ativos são aqueles que manipulam o dispositivo para que
+possam obter as informações desejadas. Eles podem fazer isso, por exemplo,
+injetando vários tipos de falhas elétricas, óticas, etc.
+\end{enumerate}
 
-\subsection{Classificação por (?)} % se é passivo ou ativo
+Além dessas classificações, pode-se classificar os side-chanell attacks em
+classes diferentes. Entre elas há:
 
-\subsection{Classificação por grau da invasão} % residual integrity (melhorar dps)
+\begin{itemize}
+\item \textbf{Ataques de tempo:} São o tipo de ataque mais clássico. Eles se
+baseam na diferença de tempo na execução de algoritmos dependendo do dado. Por
+exemplo, considere um algoritmo que verifica se uma senha está correta.
+\begin{lstlisting}[language=c]
+bool check_password(char *passwd) {
+    for (int i = 0; i  < pass_len; i++)
+        if (passwd[i] != stored_passwd[i])
+            return false;
+    return true;
+}
+\end{lstlisting}
+Observamos que o algoritmo devolve falso assim que descobre um caracter que não
+bate com o da senha e retorna verdadeiro caso todos os caracteres estejam
+corretos. Ou seja, caso se tente uma senha na qual o primeiro caracter esteja
+correto, o algoritmo \texttt{check\_password} levará um pouco mais de tempo do
+que no caso em que o primeiro caracter esteja errado. Ao analisar, portanto, o
+tempo caso, obtem-se um método eficiente de descobrir qual é a senha desejada.
+
+
+\item \textbf{Ataques de análise de gasto energético:} Nesse tipo de ataque, o
+canal lateral observado é o gasto energético do dispositivo. Como as instruções
+são enviadas e executadas por cadeias de transistores, é possível obter um
+padrão característico de cada instrução.
+
+Esses ataques são divididos em \textbf{simples} e \textbf{diferenciais}. O
+simples envolve uma análise manual significante e ele pode ser evitado gerando
+gastos aleatórios de energia (por exemplo, inserindo ciclos extras que não fazem
+nada além colaborativo). No diferencial, entretanto, o atacante mede os gastos
+energéticos várias vezes e depois cria um modelo de gasto teórico de energia de
+um algoritmo com um pequeno número de bits chutados. Depois disso, o
+atacante cria modelos estatísticos para dizer quão perto os chutes estão
+próximos das respostas corretas. Devido ao alto número de medições e métodos
+estatísticos poderosos, essa abordágem pode conseguir resultados mesmo se
+medidas de proteção forem tomadas.
+
+\item \textbf{Ataques eletromagnéticos:}
+
+\item \textbf{Ataques acústicos:}
+
+\item \textbf{Ataques óticos:}
+
+\item \textbf{Ataques de dados remanecente:}
+
+\item \textbf{Ataques de análise de falha:}
+\end{itemize}
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
