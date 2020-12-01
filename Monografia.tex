@@ -3,7 +3,6 @@
 \documentclass[12pt, a4paper, oneside]{article}
 
 \input{packages.tex}
-\usepackage{csquotes}
 \input{macros.tex}
 
 \title{Side-Channel Attack}
@@ -123,15 +122,49 @@ próximos das respostas corretas. Devido ao alto número de medições e método
 estatísticos poderosos, essa abordágem pode conseguir resultados mesmo se
 medidas de proteção forem tomadas.
 
-\item \textbf{Ataques eletromagnéticos:}
+\item \textbf{Ataques eletromagnéticos:} Esses ataques se aproveitam de sinais
+eletromagnéticos que um dispositivo acaba emitindo. Um exemplo clássico foram os
+ataques TEMPEST, um dos primeiros tipos de Side Channel Attacks a serem
+estudados.
 
-\item \textbf{Ataques acústicos:}
+\item \textbf{Ataques acústicos:} Eles se aproveitam de barulhos emitidos pelo
+computador para extrair informações importantes. Um exemplo bastante
+interessante é ouvir o barulho das teclas do teclado e deduzir quais foram as
+teclas pressionadas. (AI que deduz as teclas) Outro exemplo de ataque acústico é
+aquele que explora os pequenos sons emitidos por um computador devido ao
+estresse mecânico causado pelo calor. Esses sons podem ser captados e utilizados
+junto com alguma análise estatística para gerar
+informação.~\cite{Shamir2013acousticrsa}
 
-\item \textbf{Ataques óticos:}
+\item \textbf{Ataques óticos:} Utilizando câmeras de alta resolução apontadas
+para partes específicas do computador é possível extrair informações de quais
+instruções o computador está executando. Por exemplo, podemos usar uma câmera
+infravermelha apontada para o processador e fazer um mapa de calor.
 
-\item \textbf{Ataques de dados remanecente:}
+\item \textbf{Ataques de dados remanecente:} Esses ataques conseguem ler dados
+mesmo depois de terem sido deletados. Muitas vezes, quando deletamos um arquivo
+utilizando uma chamada para o sistema, a única mudança realizada pelo SO é
+marcar aquelas posições de memória do disco como livres, para que outros dados
+possam sobrescrevê-las no futuro. Isso abre, portanto, uma brecha para que se
+possa recuparar os dados supostamente deletados.
 
-\item \textbf{Ataques de análise de falha:}
+Outro exemplo é o chamado \textit{cold boot attack}, em que um atacante com
+acesso físico ao computador performa um \textit{dump} da memória RAM ao dar um
+\textit{hard reset} da máquina. Ao contrário do que se pensa, a memória volátil
+não perde todos os dados assim que cortamos a energia do computador. Na verdade,
+alguns dados podem ficar até noventa minutos na memória após o computador ser
+desligado. Consequentemente, um atacante pode performar o chamado \textit{cold
+boot}, ligando a máquina através de um sistema operacional especial
+pré-instalado em um USB, CD-ROM ou pela rede para que esses dados possam ser
+recuperados e utilizados pelo atacante para encontrar informação
+sensível.~\cite{Halderman2009coldboot, Bali2018coldbootcellphones}
+
+\item \textbf{Ataques de análise de falha:} Esse tipo de ataque introduz falhas
+propositalmente em mecanismos de criptografia para revelar como eles funcionam
+internamente. Um chip de cartão de crédito, por exemplo, pode ser exposto a
+altas temperaturas ou voltagens, a campos eletromagnéticos forte ou até mesmo a
+radiação para influenciar o processador na tentativa de deduzir quais são as
+instruções em execução.
 \end{itemize}
 
 
