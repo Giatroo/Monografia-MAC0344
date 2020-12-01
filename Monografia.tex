@@ -8,8 +8,8 @@
 
 \title{Side-Channel Attack}
 \author{
-    Leonardo Costa Santos - 10783142 &&
-    Lucas Paiolla Forastiere - 11221911 &&
+    Leonardo Costa Santos - 10783142\\
+    Lucas Paiolla Forastiere - 11221911\\
     Julia Leite - 11221797
 }
 \date{\today}
@@ -20,11 +20,11 @@
 \begin{document}
 
 \maketitle
-\newpage
+\newpage 
 
 \section{Introdução}
 
-Side-Channel Attacks, que do inglês significa, Ataque por Canal Lateral são
+\par Side-Channel Attacks, que do inglês significa, Ataque por Canal Lateral são
 jeitos explorar vunerabilidades físicas de componentes eletrônicos, como a CPU
 de um computador.
 
@@ -56,10 +56,30 @@ excluidos do disco entre muitos outros.
 
 \section{História} % julia
 
-Primeira pessoa a usar o termo (Side Channel Cryptanalysis of Product Ciphers)
-Primeiro ataque descoberto (TEMPEST 1942)
-Popularização do termo
-Mais descobertas de ataques
+\par Um dos mais notórios ataques análogo ao que hoje conhecemos como ataque por canais laterais, foi chamado, 
+pela \textit{National Security Agency} (NSA) de Tempest\cite{tempestNSA} \cite{historyWired},
+e ocorreu em 1943, quando pesquisadores do \textit{Bell Lab} 
+descobriram que, utilizando um osciloscópio, era possível recuperar $75\%$ do texto da mensagem 
+emitita por um \textit{teletype machine} há 80 pés (aproximadamente 24.3m) de distância.
+
+\par Entretanto, o termo \textit{Side Channel Cryptanalysis} sugiu 
+apenas em 1998, em um artigo \cite{historyPaper} onde uma equipe formada por criptógrafos
+da Counterpane Systems e pesquisadores da \textit{Universy of California
+at Berkley} descreveu como ataques por canais laterais podem ser usados para 
+quebrar sistemas de criptografia.
+
+\par Em 2014, pesquisadores da \textit{Tel Aviv University} \cite{RatioTelAviv}
+desenvolveram um dispositivo capaz de descobrir senhas criptografadas
+de laptop's próximos motitorando sua emissão elétrica. Além disso, em agosto do mesmo
+ano, esse grupo de pesquisadores publicou um artigo mostrando que o padrão 
+sons emitidos por um computador durante o processo de descriptografia, detectável
+por um microfone, varia de acordo com a chave RSA utilizada, apesar disso,
+não ficou claro como extrair os bits da chave RSA.\cite{historyMic}
+
+\par Desde 2018, o termo \textit{side channel attack} se popularizou
+graças à descoberta de vunerabilidades presentes na maioria dos 
+processadores Intel fabricados nas últimas duas décadas, exploradas
+por SCA como Meltdown, Spectre, entre outros.
 
 \newpage
 
@@ -82,7 +102,50 @@ Teste citando \cite{Lipp2018meltdown}
 \subsection{Spectre} % leo
 \subsection{CacheOut} % leo
 \subsection{SGAxe} % lucas
+
+
 \subsection{ZombieLoad} % julia
+
+\par Em 14 de maio de 2019 um grupo formado por pesquisadores de 
+diversas universidades, dentre elas a austríaca  Graz University of 
+Technology e a belga Catholic University of Leuven, e por equipes das 
+empresas de segurança Oracle, Cyberus, entre outras, juntamente com a 
+Intel, reportou uma novo tipo de SCA, nomeado ZombieLoad \cite{Schwarz2019ZombieLoad}, que explora 
+vulnerabilidades presentes na maioria dos processadores Intel 
+fabricados após 2011.\cite{zombieWired}
+
+\par O ZombieLoad, assim com o Spectre, Meltdown, Foreshadow, entre 
+outros, pertence à classe dos \textit{transient-execution attacks} \cite{canella2019systematic}, 
+ataques que exploram vulnerabilidades resultantes de técnicas 
+utilizadas para melhorar a performance do computador, como a execução 
+fora de ordem e a execução especulativa. A primeira é um  paradigma 
+que permite que a CPU, ao invés de executar as microoperações de um conjunto de 
+instruções sequencialmente, execute-as em paralelo, mesmo que a 
+microoperação anterior não tenha sido finalizada, e as reorganize 
+depois, decidindo aproveitar ou descartar os resultados. 
+Já a segunda  consiste na CPU executar instruções especulativamente, 
+ou seja, antes delas aparecerem na lista de instruções, utilizando 
+análise do fluxo de dados e predicção de desvio, assim como na técnica 
+anterior, os resultados das instruções executadas especulativamente 
+podem ser aproveitados ou descartados.
+
+\par Nesse caso, chamamos essa instrução executada fora de ordem ou 
+especulativamente, cujo resultado foi descartado de \textit{transient 
+instruction}. Os efeitos da \textit{transient execution} são descartados, 
+contudo, utilizando canais laterais como o \textit{CPU cache subsystem},
+é possível extrair dados de outros processos carregados no 
+mesmo core da CPU, como senhas, tokens, histórico de navegação do 
+browser, entre outros.
+
+\par A Intel liberou correções em microcódigo para os processadores 
+vulneráveis e a 8ª e 9ª geração de processadores possuem correção em 
+hardware. Contudo, essas mitigações reduzem a velocidade do computador 
+em $3\%$ e a potência em $9\%$. Os pesquisadores, no entanto, afirmam 
+que essas medidas são insuficientes para evitar que um computador 
+esteja vulnerável a esse ataque e que a solução mais segura seria 
+desabilitar o \textit{hyperthreading}. \cite{cyberus}
+
+
 \subsection{Foreshadow} % julia
 
 \newpage

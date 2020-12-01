@@ -1,0 +1,15 @@
+\BOOKMARK [1][-]{section.1}{Introdu\347\343o}{}% 1
+\BOOKMARK [1][-]{section.2}{Hist\363ria}{}% 2
+\BOOKMARK [1][-]{section.3}{Classifica\347\365es de Side-Channel Attacks}{}% 3
+\BOOKMARK [2][-]{subsection.3.1}{Classifica\347\343o por \(?\)}{section.3}% 4
+\BOOKMARK [2][-]{subsection.3.2}{Classifica\347\343o por grau da invas\343o}{section.3}% 5
+\BOOKMARK [1][-]{section.4}{Exemplos de Side-Channel Attacks}{}% 6
+\BOOKMARK [2][-]{subsection.4.1}{Meltdown}{section.4}% 7
+\BOOKMARK [2][-]{subsection.4.2}{Spectre}{section.4}% 8
+\BOOKMARK [2][-]{subsection.4.3}{CacheOut}{section.4}% 9
+\BOOKMARK [2][-]{subsection.4.4}{SGAxe}{section.4}% 10
+\BOOKMARK [2][-]{subsection.4.5}{ZombieLoad}{section.4}% 11
+\BOOKMARK [2][-]{subsection.4.6}{Foreshadow}{section.4}% 12
+\BOOKMARK [1][-]{section.5}{H\341 jeito de se previmir?}{}% 13
+\BOOKMARK [1][-]{section.6}{H\341 como saber se estou sofrendo um SCA?}{}% 14
+\BOOKMARK [1][-]{section.7}{Conclus\343o}{}% 15

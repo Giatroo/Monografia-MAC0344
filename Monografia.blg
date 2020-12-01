@@ -1,0 +1,15 @@
+[0] Config.pm:302> INFO - This is Biber 2.9
+[1] Config.pm:305> INFO - Logfile is 'Monografia.blg'
+[40] biber:313> INFO - === ter dez  1, 2020, 09:59:06
+[71] Biber.pm:371> INFO - Reading 'Monografia.bcf'
+[160] Biber.pm:857> INFO - Found 10 citekeys in bib section 0
+[180] Biber.pm:3981> INFO - Processing section 0
+[195] Biber.pm:4154> INFO - Looking for bibtex format file 'refs.bib' for section 0
+[197] bibtex.pm:1468> INFO - LaTeX decoding ...
+[214] bibtex.pm:1294> INFO - Found BibTeX data source 'refs.bib'
+[338] UCollate.pm:68> INFO - Overriding locale 'pt-BR' defaults 'variable = shifted' with 'variable = non-ignorable'
+[338] UCollate.pm:68> INFO - Overriding locale 'pt-BR' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[338] Biber.pm:3809> INFO - Sorting list 'nty/global//global/global' of type 'entry' with template 'nty' and locale 'pt-BR'
+[338] Biber.pm:3815> INFO - No sort tailoring available for locale 'pt-BR'
+[364] bbl.pm:617> INFO - Writing 'Monografia.bbl' with encoding 'UTF-8'
+[375] bbl.pm:720> INFO - Output to Monografia.bbl
