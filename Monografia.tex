@@ -263,6 +263,39 @@ programa atacante.
 
 \subsection{Spectre} % leo
 \subsection{CacheOut} % leo
+CacheOut é um ataque de \emph{Microarchitectural Data Sampling} (MDS), ou
+Amostragem de Dados Microarquitetural, capaz de evitar as medidas de segurança
+contra MDSs dos processadores da Intel. Este ataque é capaz de vazar dados
+atravéz de barreiras de segurança como o isomento de mémoria entre processos,
+entre \emph{user/kernel spaces}, \emph{SGX enclaves} e máquinas virtuais.
+Ao causar contenção de linhas de cache, CacheOut causa a expulsão de dados do
+cache e lê estes dados dos LFBs com um ataque TAA, conseguindo vazar páginas
+inteiras de memória.~\cite{schaik2020cacheout}
+
+\subsubsection{Line Fill Buffers}
+\emph{Line Fill Buffers} (LFBs) são \emph{buffers} microarquiteturais usados
+para armazenar dados durante acessos ao cache L1, tratando de pedidos ao
+cache em \emph{cache misses} e temporariamente armazenando dados em acessos
+à memória e operações de I/O. Também podem ser usados em \emph{cache hits}
+e para encaminhar dados para operações de leitura e escrita no
+cache.~\cite{IntelMDS}
+
+\subsubsection{Transactional Synchronization Extensions}
+\emph{Transactional Synchronization Extensions} (TSX) é uma implementação de
+transações de memória, que agrupa instruções em transacões executadas de modo
+atômico, executando todas as instruções da transação especulativamente e
+consolidando os resultados apenas após a execução de sua última instrução. Se
+alguma instrução causa uma \emph{memory fault}, a transação inteira é
+descartada.~\cite{schaik2020cacheout}
+
+\subsubsection{TSX Asynchronous Abort}
+\emph{TSX Asynchronous Abort} é um tipo de ataque que zera linhas de cache
+antes de uma transação que carrega dados dessas linhas, causando uma falha
+na transação. Alocando espaço no LFB antes da transação, os dados do LFB são
+encaminhados para a instrução que causa a \emph{fault}. Como a transação não
+é completada, a instrução é executada com dados de uma transação anterior,
+permitindo a amostragem desses dados.~\cite{schaik2020cacheout}
+
 \subsection{SGAxe} % lucas
 \subsection{ZombieLoad} % julia
 \subsection{Foreshadow} % julia
