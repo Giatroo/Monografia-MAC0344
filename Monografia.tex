@@ -3,7 +3,6 @@
 \documentclass[12pt, a4paper, oneside]{article}
 
 \input{packages.tex}
-\usepackage{csquotes}
 \input{macros.tex}
 
 \title{Side-Channel Attack}
@@ -20,7 +19,6 @@
 \begin{document}
 
 \maketitle
-\newpage
 
 \section{Introdução}
 
@@ -67,10 +65,109 @@ Mais descobertas de ataques
 
 \section{Classificações de Side-Channel Attacks} % lucas
 
+Na classificação mais clássica de Side-Channel Attacks, temos que eles podem ser
+classificados quanto a duas categorias:
+\begin{enumerate}
+\item Invasivo \textit{vs.} não-invasivo: Ataques invasivos são aqueles que
+abrem o aparelho sobre ataque. Um exemplo disso é conectar um cabo a um
+barramento do computador para ver os dados transferidos por aquele barramento.
+Os ataques invasivos por sua vez podem ser subdividos em
+\textbf{completamente invasivos} ou \textbf{parcialmente invasivos}. Os
+parcialmente invasivos são aqueles que deixam o componente intacto após o
+ataque, enquanto os completamente invasivos são aqueles que danificam o
+componente para que o ataque possa ser realizado.
+\item Ativo \textit{vs.} passivo: Os ataques passivos são aqueles que se
+restringem a observar os comportamentos de um dispositivo para realizar o
+ataque, enquanto os ativos são aqueles que manipulam o dispositivo para que
+possam obter as informações desejadas. Eles podem fazer isso, por exemplo,
+injetando vários tipos de falhas elétricas, óticas, etc.
+\end{enumerate}
 
-\subsection{Classificação por (?)} % se é passivo ou ativo
+Além dessas classificações, pode-se classificar os side-chanell attacks em
+classes diferentes. Entre elas há:
 
-\subsection{Classificação por grau da invasão} % residual integrity (melhorar dps)
+\begin{itemize}
+\item \textbf{Ataques de tempo:} São o tipo de ataque mais clássico. Eles se
+baseam na diferença de tempo na execução de algoritmos dependendo do dado. Por
+exemplo, considere um algoritmo que verifica se uma senha está correta.
+\begin{lstlisting}[language=c]
+bool check_password(char *passwd) {
+    for (int i = 0; i  < pass_len; i++)
+        if (passwd[i] != stored_passwd[i])
+            return false;
+    return true;
+}
+\end{lstlisting}
+Observamos que o algoritmo devolve falso assim que descobre um caracter que não
+bate com o da senha e retorna verdadeiro caso todos os caracteres estejam
+corretos. Ou seja, caso se tente uma senha na qual o primeiro caracter esteja
+correto, o algoritmo \texttt{check\_password} levará um pouco mais de tempo do
+que no caso em que o primeiro caracter esteja errado. Ao analisar, portanto, o
+tempo caso, obtem-se um método eficiente de descobrir qual é a senha desejada.
+
+
+\item \textbf{Ataques de análise de gasto energético:} Nesse tipo de ataque, o
+canal lateral observado é o gasto energético do dispositivo. Como as instruções
+são enviadas e executadas por cadeias de transistores, é possível obter um
+padrão característico de cada instrução.
+
+Esses ataques são divididos em \textbf{simples} e \textbf{diferenciais}. O
+simples envolve uma análise manual significante e ele pode ser evitado gerando
+gastos aleatórios de energia (por exemplo, inserindo ciclos extras que não fazem
+nada além colaborativo). No diferencial, entretanto, o atacante mede os gastos
+energéticos várias vezes e depois cria um modelo de gasto teórico de energia de
+um algoritmo com um pequeno número de bits chutados. Depois disso, o
+atacante cria modelos estatísticos para dizer quão perto os chutes estão
+próximos das respostas corretas. Devido ao alto número de medições e métodos
+estatísticos poderosos, essa abordágem pode conseguir resultados mesmo se
+medidas de proteção forem tomadas.
+
+\item \textbf{Ataques eletromagnéticos:} Esses ataques se aproveitam de sinais
+eletromagnéticos que um dispositivo acaba emitindo. Um exemplo clássico foram os
+ataques TEMPEST, um dos primeiros tipos de Side Channel Attacks a serem
+estudados.
+
+\item \textbf{Ataques acústicos:} Eles se aproveitam de barulhos emitidos pelo
+computador para extrair informações importantes. Um exemplo bastante
+interessante é ouvir o barulho das teclas do teclado e deduzir quais foram as
+teclas pressionadas. (AI que deduz as teclas) Outro exemplo de ataque acústico é
+aquele que explora os pequenos sons emitidos por um computador devido ao
+estresse mecânico causado pelo calor. Esses sons podem ser captados e utilizados
+junto com alguma análise estatística para gerar
+informação.~\cite{Shamir2013acousticrsa}
+
+\item \textbf{Ataques óticos:} Utilizando câmeras de alta resolução apontadas
+para partes específicas do computador é possível extrair informações de quais
+instruções o computador está executando. Por exemplo, podemos usar uma câmera
+infravermelha apontada para o processador e fazer um mapa de calor.
+
+\item \textbf{Ataques de dados remanecente:} Esses ataques conseguem ler dados
+mesmo depois de terem sido deletados. Muitas vezes, quando deletamos um arquivo
+utilizando uma chamada para o sistema, a única mudança realizada pelo SO é
+marcar aquelas posições de memória do disco como livres, para que outros dados
+possam sobrescrevê-las no futuro. Isso abre, portanto, uma brecha para que se
+possa recuparar os dados supostamente deletados.
+
+Outro exemplo é o chamado \textit{cold boot attack}, em que um atacante com
+acesso físico ao computador performa um \textit{dump} da memória RAM ao dar um
+\textit{hard reset} da máquina. Ao contrário do que se pensa, a memória volátil
+não perde todos os dados assim que cortamos a energia do computador. Na verdade,
+alguns dados podem ficar até noventa minutos na memória após o computador ser
+desligado. Consequentemente, um atacante pode performar o chamado \textit{cold
+boot}, ligando a máquina através de um sistema operacional especial
+pré-instalado em um USB, CD-ROM ou pela rede para que esses dados possam ser
+recuperados e utilizados pelo atacante para encontrar informação
+sensível.~\cite{Halderman2009coldboot, Bali2018coldbootcellphones}
+
+\item \textbf{Ataques de análise de falha:} Esse tipo de ataque introduz falhas
+propositalmente em mecanismos de criptografia para revelar como eles funcionam
+internamente. Um chip de cartão de crédito, por exemplo, pode ser exposto a
+altas temperaturas ou voltagens, a campos eletromagnéticos forte ou até mesmo a
+radiação para influenciar o processador na tentativa de deduzir quais são as
+instruções em execução.
+\end{itemize}
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -78,7 +175,92 @@ Mais descobertas de ataques
 
 \subsection{Meltdown} % lucas
 
-Teste citando \cite{Lipp2018meltdown}
+Meltdown é um SCA relacionado ao processador e a um efeito colateral da execução
+fora-de-ordem feita por ele. Graças a ela, o Meltdown consegue quebrar a
+hierarquia entre o \textit{espaço do usuário} e o \textit{espaço do núcleo},
+podendo ler informações que não deveriam ser acessíveis por qualquer usuário,
+como senhas e dados pessoais.
+
+Atualmente, o principal mecanismo de defesa de qualquer sistema operacional é a
+\textit{isolação da memória}, dividindo a memória principal entre os diversos
+processos em andamento de forma que as regiões de memória em uso por um não
+possam ser acessadas por outros.
+
+Para conseguir isso e outras propriedades importantes do Sistema Operacional,
+ele se utiliza da chamada \textit{memória virtual}, que é uma abstração para a
+memória física. Essa memória virtual é divide em páginas de memória que podem
+ser individualmente mapeadas em regiões da memória física através de uma
+\textit{tabela de tradução de páginas}.
+
+Essa tabela não só tem como função mapear as páginas de memória, mas também
+dividi-las entre as páginas que pertecem ao usuário e às que pertencem ao núcleo
+(e daí surgem os termos \textit{espaço do usuário} e \textit{espaço do núcleo}).
+
+Através da tabela, o SO garante que o usuário não conseguirá acessar espaços de
+acesso restrito ao núcleo. Entretanto, o núcleo pode e deve ter acesso a toda a
+memória física em si (inclusive a parte em que se mapeam as páginas de usuário).
+Isso significa na prática que dentro da memória virtual do núcleo, existe uma
+região que mapea toda a memória física, permitindo que o núcleo altere posições
+de memória do usuário quando ele faz chamadas ao sistema.
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.9]{Res/virtual_memory_mapping.png}
+\caption{A memória física é completamente mapeada pelo núcleo em um certo ponto
+da sua memória virtual. Os endreços físicos (em azul) são mapeados pelo usuário,
+mas também pelo núcleo, sendo acessível pelos dois com eficiência.}
+\label{virtual_memory_mapping}
+\end{figure}
+
+Além disso, outro mecanismo crucial de defesa é a separação entre o
+\textit{espaço do usuário} e o \textit{espaço do núcleo}, ou seja, uma divisão
+entre quais processos (e quais partes da memória) pertencem a processos do
+usuário e quais pertencem ao sistema operacional em si.
+
+Essa divisão é tipicamente realizada por um bit supervisor do processador que
+define se uma página de memória do núcleo pode ou não ser acessada. E a ideia
+por trás desse bit é que ele será mudado para $1$ quando um processo precisa
+fazer chamadas ao sistemas (\textit{syscalls}), portanto parando de executar
+código do usuário e passando a executar código do núcleo, e mudado novamente
+para $0$ quando saímos do modo núcleo.
+
+Esse bit é utilizado com uma ideia de eficiência, pois permite que o SO mapeie o
+núcleo no espaço de endereço do processo que fez a \textit{syscall}.
+Consequentemente, não há nenhuma mudança no mapeamento da memória quando mudamos
+do modo usuário para o modo núcleo (o que é crucial para garantir mais
+velocidade).
+
+O Meltdown explora uma vunerabilidade causa pela \textit{execução fora-de-ordem}
+para ler dados mapeados no espaço de endereço do núcleo, o que inclui a memória
+física inteira em sistemas Linux, Android e OS X e uma grande parte da memória
+física em ambientes Windows.
+
+As CPUs modernas possuem essa técnica de otimização chamada de \textit{execução
+fora-de-ordem} que permite que os núcleos passem mais tempo trabalhando, mesmo
+quando uma determinada operação precisa esperar algum recurso (por exemplo,
+trazer um valor da memória). Basicamente, o que acontece é que ao invés de a CPU
+executar as instruções sequenciamente, ela vai as executando assim que todos os
+recursos necessários para uma determinada instrução estiverem disponíveis.
+
+Na prática, isso significa que a CPU \textit{especula} que uma determina
+instrução será executada no futuro e, então, faz a sua execução antes mesmo de
+ter certeza disso. O desenvolvedor do algoritmo que possibilitou a
+\textit{execução fora-de-ordem} foi Tomasulo em
+1967~\cite{Tomasulo1967outoforder}.
+
+% TODO: Pensar se explica como é implementada a execução fora de ordem em um
+% procesador Intel. Daí colocar a foto igual no artigo <24-11-20, Lucas> %
+
+A vunerabilidade encontrada pelo Meltdown se deve ao fato de que ao tentar
+executar uma instrução de acessar uma região de memória que não pertence ao
+programa, a \textit{execução fora-de-ordem} acabará fazendo o acesso e
+armazenando o valor no \textit{cache}. Apenas depois que esse dado é armazenado
+no \textit{cache}, a CPU percebe que a instrução não deveria ser executada e
+não de fato entrega esse valor ao programa que solicitou. Contudo, como o dado
+está em cache, o programa pode fazer um \textit{ataque ao cache} para recuperar
+essa informação, acessando, portanto, uma região da memória que não pertence ao
+programa atacante.
+
 \subsection{Spectre} % leo
 \subsection{CacheOut} % leo
 \subsection{SGAxe} % lucas
