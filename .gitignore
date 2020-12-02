@@ -1,5 +1,7 @@
-Monografia.bbl
-Monografia.run.xml
-Monografia.tex.bbl
-Monografia.tex.blg
-Monografia.synctex.gz
+*
+!*.tex
+!*.bib
+!*.pdf
+!Res/*
+!.gitignore
+!*.md
