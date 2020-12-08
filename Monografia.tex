@@ -105,17 +105,17 @@ por SCA como Meltdown, Spectre, entre outros.
 \section{Classificações de Side-Channel Attacks} % lucas
 
 Na classificação mais clássica de Side-Channel Attacks, temos que eles podem ser
-classificados quanto a duas categorias:
+classificados quanto a duas categorias:~\cite{Spreitzer2018classification,
+Standaert2010introduction, Hutle2015resilience}
 
 \begin{enumerate}
     \item Invasivo \textit{vs.} não-invasivo: Ataques invasivos são aqueles que
-abrem o aparelho sobre ataque. Um exemplo disso é conectar um cabo a um
-barramento do computador para ver os dados transferidos por aquele barramento.
-Os ataques invasivos por sua vez podem ser subdividos em
-    \textbf{completamente invasivos} ou \textbf{parcialmente invasivos}. Os
-parcialmente invasivos são aqueles que deixam o componente intacto após o
-ataque, enquanto os completamente invasivos são aqueles que danificam o
-componente para que o ataque possa ser realizado.
+abrem o aparelho atacado. Um exemplo disso é conectar um cabo a um barramento
+do computador para ver os dados transferidos por aquele barramento.  Os ataques
+invasivos por sua vez podem ser subdividos em \textbf{completamente invasivos}
+ou \textbf{parcialmente invasivos}. Os parcialmente invasivos são aqueles que
+deixam o componente intacto após o ataque, enquanto os completamente invasivos
+são aqueles que danificam o componente para que o ataque possa ser realizado.
     \item Ativo \textit{vs.} passivo: Os ataques passivos são aqueles que se
 restringem a observar os comportamentos de um dispositivo para realizar o
 ataque, enquanto os ativos são aqueles que manipulam o dispositivo para que
@@ -138,13 +138,13 @@ exemplo, considere um algoritmo que verifica se uma senha está correta.
         return true;
     }
     \end{lstlisting}
-Observamos que o algoritmo devolve falso assim que descobre um caracter que não
+Observa-se que o algoritmo devolve falso assim que descobre um caracter que não
 bate com o da senha e retorna verdadeiro caso todos os caracteres estejam
 corretos. Ou seja, caso se tente uma senha na qual o primeiro caracter esteja
 correto, o algoritmo \texttt{check\_password} levará um pouco mais de tempo do
 que no caso em que o primeiro caracter esteja errado. Ao analisar, portanto, o
-tempo caso, obtem-se um método eficiente de descobrir qual é a senha desejada.
-
+tempo de retorno, obtem-se um método eficiente de descobrir qual é a senha
+desejada.~\cite{Hutle2015resilience}
 
     \item \textbf{Ataques de análise de gasto energético:} Nesse tipo de ataque,
 o canal lateral observado é o gasto energético do dispositivo. Como as
@@ -152,28 +152,37 @@ instruções são enviadas e executadas por cadeias de transistores, é possíve
 obter um padrão característico de cada instrução.
 
 Esses ataques são divididos em \textbf{simples} e \textbf{diferenciais}. O
-simples envolve uma análise manual significante e ele pode ser evitado gerando
+simples envolve uma análise manual significativa e ele pode ser evitado gerando
 gastos aleatórios de energia (por exemplo, inserindo ciclos extras que não fazem
-nada além colaborativo). No diferencial, entretanto, o atacante mede os gastos
+nada colaborativo). No diferencial, entretanto, o atacante mede os gastos
 energéticos várias vezes e depois cria um modelo de gasto teórico de energia de
 um algoritmo com um pequeno número de bits chutados. Depois disso, o
-atacante cria modelos estatísticos para dizer quão perto os chutes estão
-próximos das respostas corretas. Devido ao alto número de medições e métodos
-estatísticos poderosos, essa abordágem pode conseguir resultados mesmo se
-medidas de proteção forem tomadas.
+atacante cria modelos estatísticos para dizer quão perto os chutes estão das
+respostas corretas. Devido ao alto número de medições e métodos estatísticos
+poderosos, essa abordágem pode conseguir resultados mesmo se medidas de proteção
+forem tomadas.~\cite{Hutle2015resilience}
 
     \item \textbf{Ataques eletromagnéticos:} Esses ataques se aproveitam de
 sinais eletromagnéticos que um dispositivo acaba emitindo. Um exemplo clássico
 foram os ataques TEMPEST, um dos primeiros tipos de Side Channel Attacks a serem
-estudados.
+estudados. Eles também podem ser divididos em \textbf{simples} e
+\textbf{diferenciais}, pois também se pode utilizar os mesmos métodos
+estatísticos que se utilizam nos ataques de análise de gasto
+energético.~\cite{Hutle2015resilience}
 
 \item \textbf{Ataques acústicos:} Eles se aproveitam de barulhos emitidos pelo
-computador para extrair informações importantes. Um exemplo bastante
-interessante é ouvir o barulho das teclas do teclado e deduzir quais foram as
-teclas pressionadas. (AI que deduz as teclas) Outro exemplo de ataque acústico é
-aquele que explora os pequenos sons emitidos por um computador devido ao
-estresse mecânico causado pelo calor. Esses sons podem ser captados e utilizados
-junto com alguma análise estatística para gerar
+computador para extrair informações importantes.
+
+Um exemplo bastante interessante é ouvir o barulho das teclas do teclado e
+deduzir quais foram as teclas pressionadas. Ainda em 2004, quando Machine
+Learning e Redes Neurais não eram um tema em alta, um grupo de pesquisadores da
+IBM postou um artigo mostrando que Redes Neurais poderiam ser treinadas para
+reconhecer o que foi teclado com base apenas no som captado por um
+microfone.~\cite{Asonov2004KeyboardAE}
+
+Outro exemplo de ataque acústico é aquele que explora os pequenos sons emitidos
+por um computador devido ao estresse mecânico causado pelo calor. Esses sons
+podem ser captados e utilizados junto com alguma análise estatística para gerar
 informação.~\cite{Shamir2013acousticrsa}
 
     \item \textbf{Ataques óticos:} Utilizando câmeras de alta resolução
@@ -183,10 +192,11 @@ câmera infravermelha apontada para o processador e fazer um mapa de calor.
 
     \item \textbf{Ataques de dados remanecente:} Esses ataques conseguem ler
 dados mesmo depois de terem sido deletados. Muitas vezes, quando deletamos um
-arquivo utilizando uma chamada para o sistema, a única mudança realizada pelo SO
-é marcar aquelas posições de memória do disco como livres, para que outros dados
-possam sobrescrevê-las no futuro. Isso abre, portanto, uma brecha para que se
-possa recuparar os dados supostamente deletados.
+arquivo utilizando uma chamada para o sistema, a única mudança realizada por
+muitos Sistemas Operacionais é marcar aquelas posições de memória do disco como
+livres, para que outros dados possam sobrescrevê-las no futuro. Isso abre,
+portanto, uma brecha para que se possa recuparar os dados supostamente
+deletados.
 
 Outro exemplo é o chamado \textit{cold boot attack}, em que um atacante com
 acesso físico ao computador performa um \textit{dump} da memória RAM ao dar um
@@ -197,14 +207,15 @@ desligado. Consequentemente, um atacante pode performar o chamado \textit{cold
 boot}, ligando a máquina através de um sistema operacional especial
 pré-instalado em um USB, CD-ROM ou pela rede para que esses dados possam ser
 recuperados e utilizados pelo atacante para encontrar informação
-sensível.~\cite{Halderman2009coldboot, Bali2018coldbootcellphones}
+sensível.~\cite{Halderman2009coldboot, Bali2018coldbootcellphones,
+privateCore2013CBvideo}
 
     \item \textbf{Ataques de análise de falha:} Esse tipo de ataque introduz
-falhas propositalmente em mecanismos de criptografia para revelar como eles
-funcionam internamente. Um chip de cartão de crédito, por exemplo, pode ser
-exposto a altas temperaturas ou voltagens, a campos eletromagnéticos forte ou
-até mesmo a radiação para influenciar o processador na tentativa de deduzir
-quais são as instruções em execução.
+falhas propositalmente em mecanismos para revelar como eles funcionam
+internamente. Um chip de cartão de crédito, por exemplo, pode ser exposto a
+altas temperaturas ou voltagens, a campos eletromagnéticos forte ou até mesmo a
+radiação para influenciar o processador na tentativa de deduzir quais são as
+instruções em execução.
 \end{itemize}
 
 
@@ -215,8 +226,8 @@ quais são as instruções em execução.
 \subsection{Meltdown} % lucas
 
 Meltdown é um SCA relacionado ao processador e a um efeito colateral da execução
-fora-de-ordem feita por ele. Graças a ela, o Meltdown consegue quebrar a
-hierarquia entre o \textit{espaço do usuário} e o \textit{espaço do núcleo},
+\textit{fora-de-ordem} feita por ele. Graças a ela, o Meltdown consegue quebrar
+a hierarquia entre o \textit{espaço do usuário} e o \textit{espaço do núcleo},
 podendo ler informações que não deveriam ser acessíveis por qualquer usuário,
 como senhas e dados pessoais.
 
@@ -275,11 +286,12 @@ física inteira em sistemas Linux, Android e OS X e uma grande parte da memória
 física em ambientes Windows.
 
 As CPUs modernas possuem essa técnica de otimização chamada de \textit{execução
-fora-de-ordem} que permite que os núcleos passem mais tempo trabalhando, mesmo
-quando uma determinada operação precisa esperar algum recurso (por exemplo,
-trazer um valor da memória). Basicamente, o que acontece é que ao invés de a CPU
-executar as instruções sequenciamente, ela vai as executando assim que todos os
-recursos necessários para uma determinada instrução estiverem disponíveis.
+fora-de-ordem} que permite que os núcleos passem mais tempo trabalhando (menos
+tempo ocioso), mesmo quando uma determinada operação precisa esperar algum
+recurso (por exemplo, trazer um valor da memória). Basicamente, o que acontece é
+que ao invés de a CPU executar as instruções sequenciamente, ela vai as
+executando assim que todos os recursos necessários para uma determinada
+instrução estiverem disponíveis.
 
 Na prática, isso significa que a CPU \textit{especula} que uma determina
 instrução será executada no futuro e, então, faz a sua execução antes mesmo de
@@ -299,6 +311,14 @@ não de fato entrega esse valor ao programa que solicitou. Contudo, como o dado
 está em cache, o programa pode fazer um \textit{ataque ao cache} para recuperar
 essa informação, acessando, portanto, uma região da memória que não pertence ao
 programa atacante.
+
+Todo processor Intel feito desde 1995 (exceto o Intel Itanium e Intel Atom)
+implementa \textit{execuções fora-de-ordem} e, portanto, está suscetível. Além
+disso, é bastante difícil de detectar se um computador está sendo explorado pelo
+Meltdown, pois ele é um ataque a nível de CPU. Entretanto, nunca se teve
+notícias de computadores infectados, o que significa que, embora possível, o
+ataque é bastante difícil de se implementar na prática. Ademais, existem
+atualizações para Linux, Windows e OS X contra o Meltdown.
 
 \subsection{Spectre} % leo
 \subsection{CacheOut} % leo
