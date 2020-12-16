@@ -55,7 +55,7 @@ excluidos do disco entre muitos outros.
 \section{História} % julia
 
 \par Um dos mais notórios ataques análogo ao que hoje conhecemos como ataque por canais laterais, foi chamado,
-pela \textit{National Security Agency} (NSA) de Tempest\cite{tempestNSA} \cite{historyWired},
+pela \textit{National Security Agency} (NSA) de Tempest\cite{tempestNSA, historyWired},
 e ocorreu em 1943, quando pesquisadores do \textit{Bell Lab}
 descobriram que, utilizando um osciloscópio, era possível recuperar $75\%$ do texto da mensagem
 emitita por um \textit{teletype machine} há 80 pés (aproximadamente 24.3m) de distância.
@@ -319,8 +319,8 @@ permitindo a amostragem desses dados.~\cite{schaik2020cacheout}
 
 \par Em 14 de maio de 2019 um grupo formado por pesquisadores de
 diversas universidades, dentre elas a austríaca  Graz University of
-Technology e a belga Catholic University of Leuven, e por equipes das
-empresas de segurança Oracle, Cyberus, entre outras, juntamente com a
+Technology e a belga Catholic University of Leuven, e por equipes da
+ segurança Oracle, Cyberus, entre outras, juntamente com a
 Intel, reportou uma novo tipo de SCA, nomeado ZombieLoad \cite{Schwarz2019ZombieLoad}, que explora
 vulnerabilidades presentes na maioria dos processadores Intel
 fabricados após 2011.\cite{zombieWired}
@@ -359,6 +359,31 @@ desabilitar o \textit{hyperthreading}. \cite{cyberus}
 
 \subsection{Foreshadow} % julia
 
+Em 2015, a Intel incluiu um reforço de segurança nos processadores Intel x86, 
+O Software Guard eXtentions (SGX). SGX é um conjunto de códigos de instruções 
+relacionadas a segurança que permite ao usuário e ao sistema operacional 
+definir regiões privadas da memória, com isolamento reforçado por hardware, chamadas enclaves, cujo conteúdo não 
+pode ser lido ou salvo por qualquer processo fora do
+próprio enclave.\cite{IntelSGX}.
+
+Em 2018, contudo, um novo SCA, chamado de Foreshadow pelos cientistas que 
+descobriram, rompeu com a convicção sobre a segurança do SGX. Esse ataque, 
+denomidado L1 Terminal Fault (L1TF) pela Intel, explora uma vulnerabilidade
+na execução especulativa, a mesma explorada pelo Meltdown e permite ao 
+atacante extrair segredos do enclave enquanto estão no cache L1 sem fazer
+suposições sobre o código enclave da vítica e sem precisar de acesso ao 
+kernel. Além disso, a "versão básica" do ataque não necessita de acesso
+ao usuário \textit{root}.\cite{vanbulck2018foreshadow}
+
+Esse ataque consiste em trazer o dado do enclave para o cache L1, passo 
+desnecessário se houver acesso ao usuário \textit{root}, depois, os dados 
+do enclave presentes na L1 são extraídos em uma execução especulativa, antes 
+que a CPU perceba que o processo não tem permissão para acessar tais dados e 
+cancele a operação. 
+
+A Intel liberou mitigações em microcódigo, contudo há impacto na performance
+de \textit{cloud computing}.
+                
 \newpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
