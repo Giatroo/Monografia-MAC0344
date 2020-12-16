@@ -321,6 +321,34 @@ ataque é bastante difícil de se implementar na prática. Ademais, existem
 atualizações para Linux, Windows e OS X contra o Meltdown.
 
 \subsection{Spectre} % leo
+Spectre é uma classe de ataques que explora execução fora de ordem para vazar
+dados dos buffer microarquiteturais, sendo capaz de escolher as instruções
+que serão executadas e utilizá-las como um canal secreto para vazar os dados
+da memória do processo alvo.
+
+A primeira variante do Spectre ataca a predição de \emph{branches}
+condicionais, treinando o preditor para executar a \emph{branch} errada.
+Ele faz isso executando uma condição com entradas válidas várias vezes, e
+então executando com uma entrada inválida. Assim, o preditor fará com que o
+processador execute a \emph{branch} errada especulativamente. Se esta
+\emph{branch} faz um acesso à um endereço de memória do processo alvo, os dados
+desse endereço serão carregados no \emph{cache}, podendo ser acessados por um
+ataque ao \emph{cache}.
+
+A segunda variante ataca a predição de \emph{branches} indiretas, que busca
+prever o alvo uma instrução que acessa um endereço calculado em tempo de
+execução. O processo do atacante tenta acessar repetidamente o endereço de um
+\emph{gadget} no espaço de endereços do processo alvo, ou um endereço que é
+mapeado à mesma linha de cache. Assim, quando o processo alvo alcançar essa
+\emph{branch} indireta, o endereço que o atacante escolheu será executado
+especulativamente. Isso permite que o atacante execute trechos de código
+arbitrários do processo alvo, incluindo código de bibliotecas compartilhadas,
+e ler dados de endereços arbitrários.
+
+% explicar return oriented programming ?
+Assim, o ataque funciona como um ataque de \emph{Return Oriented Programming},
+porém sem a necessidade de vulnerabilidades no processo alvo.
+
 \subsection{CacheOut} % leo
 CacheOut é um ataque de \emph{Microarchitectural Data Sampling} (MDS), ou
 Amostragem de Dados Microarquitetural, capaz de evitar as medidas de segurança
