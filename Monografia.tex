@@ -58,20 +58,19 @@ excluidos do disco entre muitos outros.
 pela \textit{National Security Agency} (NSA) de Tempest\cite{tempestNSA, historyWired},
 e ocorreu em 1943, quando pesquisadores do \textit{Bell Lab}
 descobriram que, utilizando um osciloscópio, era possível recuperar $75\%$ do texto da mensagem
-emitita por um \textit{teletype machine} há 80 pés (aproximadamente 24.3m) de distância.
+emitida por um \textit{teletype machine} há 80 pés (aproximadamente 24.3 metros) de distância.
 
-\par Entretanto, o termo \textit{Side Channel Cryptanalysis} sugiu
-apenas em 1998, em um artigo \cite{historyPaper} onde uma equipe formada por criptógrafos
-da Counterpane Systems e pesquisadores da \textit{Universy of California
-at Berkley} descreveu como ataques por canais laterais podem ser usados para
+\par Entretanto, o termo \textit{Side Channel Cryptanalysis} surgiu
+apenas em 1998, em um artigo \cite{historyPaper} onde criptógrafos
+da Counterpane Systems e pesquisadores da \textit{University of California
+at Berkeley} descreveram como ataques por canais laterais podem ser usados para
 quebrar sistemas de criptografia.
 
 \par Em 2014, pesquisadores da \textit{Tel Aviv University} \cite{RatioTelAviv}
 desenvolveram um dispositivo capaz de descobrir senhas criptografadas
-de laptop's próximos motitorando sua emissão elétrica. Além disso, em agosto do mesmo
+de laptop's próximos monitorando sua emissão elétrica. Além disso, em agosto do mesmo
 ano, esse grupo de pesquisadores publicou um artigo mostrando que o padrão
-sons emitidos por um computador durante o processo de descriptografia, detectável
-por um microfone, varia de acordo com a chave RSA utilizada, apesar disso,
+sons, detectável por um microfone, emitidos por um computador durante o processo de descriptografia varia de acordo com a chave RSA utilizada, apesar disso,
 não ficou claro como extrair os bits da chave RSA.\cite{historyMic}
 
 \par Desde 2018, o termo \textit{side channel attack} se popularizou
@@ -368,10 +367,10 @@ próprio enclave.\cite{IntelSGX}.
 
 Em 2018, contudo, um novo SCA, chamado de Foreshadow pelos cientistas que 
 descobriram, rompeu com a convicção sobre a segurança do SGX. Esse ataque, 
-denomidado L1 Terminal Fault (L1TF) pela Intel, explora uma vulnerabilidade
-na execução especulativa, a mesma explorada pelo Meltdown e permite ao 
+denominado L1 Terminal Fault (L1TF) pela Intel, explora uma vulnerabilidade
+na execução especulativa, a mesma explorada pelo Meltdown, permitindo ao 
 atacante extrair segredos do enclave enquanto estão no cache L1 sem fazer
-suposições sobre o código enclave da vítica e sem precisar de acesso ao 
+suposições sobre o código enclave da vítima e sem precisar de acesso ao 
 kernel. Além disso, a "versão básica" do ataque não necessita de acesso
 ao usuário \textit{root}.\cite{vanbulck2018foreshadow}
 
@@ -381,7 +380,8 @@ do enclave presentes na L1 são extraídos em uma execução especulativa, antes
 que a CPU perceba que o processo não tem permissão para acessar tais dados e 
 cancele a operação. 
 
-A Intel liberou mitigações em microcódigo, contudo há impacto na performance
+As mitigações em microcódigo liberadas pela Intel são capazes de proteger
+o processador contra o Foreshadow, contudo há impacto na performance
 de \textit{cloud computing}.
                 
 \newpage
