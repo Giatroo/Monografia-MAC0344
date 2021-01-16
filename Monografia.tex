@@ -24,7 +24,7 @@
 
 \par Side-Channel Attacks, que do inglês significa Ataques por Canal Lateral,
 são jeitos explorar vunerabilidades físicas de componentes eletrônicos, como a
-CPU de um computador, através de mecanismos físico alheios à lógica do
+CPU de um computador, através de mecanismos físicos alheios à lógica do
 componente.
 
 O nome vem do fato de ser uma técnica que não ataca ``pela porta da frente'',
@@ -67,7 +67,7 @@ Existem muitas classes de SCA, como ataques ao cache (que é o caso dos dois
 exemplos citados), ataques que monitoram a energia consumida pelo
 computador, ataques que monitoram o eletromagnetismo eminido, ataques que
 monitoram o som emitido (como o exemplo do teclado), ataques que recuperam dados
-excluidos do disco entre muitos outros. Esta monografia se propõe como uma
+excluidos do disco, entre muitos outros. Esta monografia se propõe como uma
 introdução ao assunto, explicando os diferentes tipos de ataques e
 exemplificando alguns deles mais a fundo.
 
@@ -75,24 +75,24 @@ exemplificando alguns deles mais a fundo.
 
 \section{História} % julia
 
-\par Um dos mais notórios ataques análogo ao que hoje conhecemos como ataque por canais laterais, foi chamado,
-pela \textit{National Security Agency} (NSA) de Tempest\cite{tempestNSA, historyWired},
+\par Um dos mais notórios ataques análogo ao que hoje conhecemos como ataque por canais laterais, foi chamado
+pela \textit{National Security Agency} (NSA) de Tempest~\cite{tempestNSA, historyWired}
 e ocorreu em 1943, quando pesquisadores do \textit{Bell Lab}
 descobriram que, utilizando um osciloscópio, era possível recuperar $75\%$ do texto de uma mensagem
 emitida por um \textit{teletype machine} há 80 pés (aproximadamente 24.3 metros) de distância.
 
 \par Entretanto, o termo \textit{Side Channel Cryptanalysis} surgiu
-apenas em 1998, em um artigo \cite{historyPaper} onde criptógrafos
+apenas em 1998, em um artigo~\cite{historyPaper} onde criptógrafos
 da Counterpane Systems e pesquisadores da \textit{University of California
 at Berkeley} descreveram como ataques por canais laterais podem ser usados para
 quebrar sistemas de criptografia.
 
-\par Em 2014, pesquisadores da \textit{Tel Aviv University} \cite{RatioTelAviv}
+\par Em 2014, pesquisadores da \textit{Tel Aviv University}~\cite{RatioTelAviv}
 desenvolveram um dispositivo capaz de descobrir senhas criptografadas
 de laptop's próximos monitorando sua emissão elétrica. Além disso, em agosto do mesmo
 ano, esse grupo de pesquisadores publicou um artigo mostrando que o padrão
 sons, detectável por um microfone, emitidos por um computador durante o processo de descriptografia varia de acordo com a chave RSA utilizada, apesar disso,
-não ficou claro como extrair os bits da chave RSA.\cite{historyMic}
+não ficou claro como extrair os bits da chave RSA.~\cite{historyMic}
 
 \par Desde 2018, o termo \textit{side channel attack} se popularizou
 graças à descoberta de vunerabilidades presentes na maioria dos
@@ -298,9 +298,6 @@ ter certeza disso. O desenvolvedor do algoritmo que possibilitou a
 \textit{execução fora-de-ordem} foi Tomasulo em
 1967~\cite{Tomasulo1967outoforder}.
 
-% TODO: Pensar se explica como é implementada a execução fora de ordem em um
-% procesador Intel. Daí colocar a foto igual no artigo <24-11-20, Lucas> %
-
 A vunerabilidade encontrada pelo Meltdown se deve ao fato de que ao tentar
 executar uma instrução de acessar uma região de memória que não pertence ao
 programa, a \textit{execução fora-de-ordem} acabará fazendo o acesso e
@@ -343,7 +340,7 @@ mapeado à mesma linha de cache. Assim, quando o processo alvo alcançar essa
 \emph{branch} indireta, o endereço que o atacante escolheu será executado
 ou acessado especulativamente. Isso permite que o atacante execute trechos de
 código arbitrários do processo alvo, incluindo código de bibliotecas
-compartilhadas, e/ou ler dados de endereços arbitrários.\cite{Kocher2018spectre}
+compartilhadas, e/ou ler dados de endereços arbitrários.~\cite{Kocher2018spectre}
 
 % explicar return oriented programming ?
 Assim, o ataque funciona como um ataque de \emph{Return Oriented Programming},
@@ -353,7 +350,7 @@ porém sem a necessidade de vulnerabilidades no processo alvo.
 CacheOut é um ataque de \emph{Microarchitectural Data Sampling} (MDS), ou
 Amostragem de Dados Microarquitetural, capaz de evitar as medidas de segurança
 contra MDSs dos processadores da Intel. Este ataque é capaz de vazar dados
-atravéz de barreiras de segurança como o isomento de mémoria entre processos,
+atravéz de barreiras de segurança como o isolamento de mémoria entre processos,
 entre \emph{user/kernel spaces}, \emph{SGX enclaves} e máquinas virtuais.
 Ao causar contenção de linhas de cache, CacheOut causa a expulsão de dados do
 cache e lê estes dados dos LFBs com um ataque TAA, conseguindo vazar páginas
@@ -389,12 +386,12 @@ permitindo a amostragem desses dados.~\cite{schaik2020cacheout}
 diversas universidades, dentre elas a austríaca  Graz University of
 Technology e a belga Catholic University of Leuven, e por equipes da
  segurança Oracle, Cyberus, entre outras, juntamente com a
-Intel, reportou uma novo tipo de SCA, nomeado ZombieLoad \cite{Schwarz2019ZombieLoad}, que explora
+Intel, reportou uma novo tipo de SCA, nomeado ZombieLoad~\cite{Schwarz2019ZombieLoad}, que explora
 vulnerabilidades presentes na maioria dos processadores Intel
-fabricados após 2011.\cite{zombieWired}
+fabricados após 2011.~\cite{zombieWired}
 
 \par O ZombieLoad, assim com o Spectre, Meltdown, Foreshadow, entre
-outros, pertence à classe dos \textit{transient-execution attacks} \cite{canella2019systematic},
+outros, pertence à classe dos \textit{transient-execution attacks}~\cite{canella2019systematic},
 ataques que exploram vulnerabilidades resultantes de técnicas
 utilizadas para melhorar a performance do computador, como a execução
 fora de ordem e a execução especulativa. A primeira é um  paradigma
@@ -422,37 +419,37 @@ hardware. Contudo, essas mitigações reduzem a velocidade do computador
 em $3\%$ e a potência em $9\%$. Os pesquisadores, no entanto, afirmam
 que essas medidas são insuficientes para evitar que um computador
 esteja vulnerável a esse ataque e que a solução mais segura seria
-desabilitar o \textit{hyperthreading}. \cite{cyberus}
+desabilitar o \textit{hyperthreading}.~\cite{cyberus}
 
 
 \subsection{Foreshadow} % julia
 
-Em 2015, a Intel incluiu um reforço de segurança nos processadores Intel x86, 
-O Software Guard eXtentions (SGX). SGX é um conjunto de códigos de instruções 
-relacionadas a segurança que permite ao usuário e ao sistema operacional 
-definir regiões privadas da memória, com isolamento reforçado por hardware, chamadas enclaves, cujo conteúdo não 
+Em 2015, a Intel incluiu um reforço de segurança nos processadores Intel x86,
+O Software Guard eXtentions (SGX). SGX é um conjunto de códigos de instruções
+relacionadas a segurança que permite ao usuário e ao sistema operacional
+definir regiões privadas da memória, com isolamento reforçado por hardware, chamadas enclaves, cujo conteúdo não
 pode ser lido ou salvo por qualquer processo fora do
-próprio enclave.\cite{IntelSGX}.
+próprio enclave.~\cite{IntelSGX}.
 
-Em 2018, contudo, um novo SCA, chamado de Foreshadow pelos cientistas que 
-descobriram, rompeu com a convicção sobre a segurança do SGX. Esse ataque, 
+Em 2018, contudo, um novo SCA, chamado de Foreshadow pelos cientistas que
+descobriram, rompeu com a convicção sobre a segurança do SGX. Esse ataque,
 denominado L1 Terminal Fault (L1TF) pela Intel, explora uma vulnerabilidade
-na execução especulativa, a mesma explorada pelo Meltdown, permitindo ao 
+na execução especulativa, a mesma explorada pelo Meltdown, permitindo ao
 atacante extrair segredos do enclave enquanto estão no cache L1 sem fazer
-suposições sobre o código enclave da vítima e sem precisar de acesso ao 
-kernel. Além disso, a "versão básica" do ataque não necessita de acesso
-ao usuário \textit{root}.\cite{vanbulck2018foreshadow}
+suposições sobre o código enclave da vítima e sem precisar de acesso ao
+kernel. Além disso, a ``versão básica'' do ataque não necessita de acesso
+ao usuário \textit{root}.~\cite{vanbulck2018foreshadow}
 
-Esse ataque consiste em trazer o dado do enclave para o cache L1, passo 
-desnecessário se houver acesso ao usuário \textit{root}, depois, os dados 
-do enclave presentes na L1 são extraídos em uma execução especulativa, antes 
-que a CPU perceba que o processo não tem permissão para acessar tais dados e 
-cancele a operação. 
+Esse ataque consiste em trazer o dado do enclave para o cache L1, passo
+desnecessário se houver acesso ao usuário \textit{root}, depois, os dados
+do enclave presentes na L1 são extraídos em uma execução especulativa, antes
+que a CPU perceba que o processo não tem permissão para acessar tais dados e
+cancele a operação.
 
 As mitigações em microcódigo liberadas pela Intel são capazes de proteger
 o processador contra o Foreshadow, contudo há impacto na performance
 de \textit{cloud computing}.
-                
+
 \newpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
