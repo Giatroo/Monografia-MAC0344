@@ -5,11 +5,11 @@
 \input{packages.tex}
 \input{macros.tex}
 
-\title{Side-Channel Attack}
+\title{Side Channel Attack}
 \author{
-    Leonardo Costa Santos - 10783142\\
-    Lucas Paiolla Forastiere - 11221911\\
-    Julia Leite - 11221797
+    Leonardo Costa Santos\\
+    Lucas Paiolla Forastiere\\
+    Julia Leite
 }
 \date{\today}
 
@@ -22,9 +22,9 @@
 
 \section{Introdução}
 
-\par Side-Channel Attacks, que do inglês significa Ataques por Canal Lateral,
-são jeitos explorar vunerabilidades físicas de componentes eletrônicos, como a
-CPU de um computador, através de mecanismos físicos alheios à lógica do
+\par \textit{Side Channel Attacks}, que do inglês significa Ataques por Canal
+Lateral, são jeitos explorar vunerabilidades físicas de componentes eletrônicos,
+como a CPU de um computador, através de mecanismos físicos alheios à lógica do
 componente.
 
 O nome vem do fato de ser uma técnica que não ataca ``pela porta da frente'',
@@ -50,9 +50,9 @@ descifrar, ou então usar uma câmera que grava imagens em frequências de luz n
 visível. As possibilidades são vastas.
 
 Trazendo para o mundo do computador e dos algoritmos, Daniel Genkin, cientista
-da computação na Universidade de Michigan e líder em pesquisas em side channel
-attacks, dá uma ótima explicação do que são eles ao dizer que geralmente quando
-se desenvolve um algoritmo, se pensa nas entradas e saídas e não em o que
+da computação na Universidade de Michigan e líder em pesquisas em \textit{side
+channel attacks}, dá uma ótima explicação do que são eles ao dizer que geralmente
+quando se desenvolve um algoritmo, se pensa nas entradas e saídas e não em o que
 acontece quando o programa é executado. O problema é que computadores não são
 executados em papeis, mas sim em física, diz ele.~\cite{andy2020whatisanSCA}
 
@@ -60,7 +60,7 @@ Recentemente, dois SCAs trouxeram fama para o ramo ao revelar que praticamente
 qualquer computador pessoal moderno está sujeito a tais vulnerabilidades,
 independentemente do Sistema Operacional utilizado. São eles o \textit{Meltdown}
 e o \textit{Spectre}, descobertos independentemente por uma série de
-pesquisadores, destacando-se o grupo Project Zero da
+pesquisadores, destacando-se o grupo \textit{Project Zero} da
 Google.~\cite{Lipp2018meltdown}
 
 Existem muitas classes de SCA, como ataques ao cache (que é o caso dos dois
@@ -83,7 +83,7 @@ emitida por um \textit{teletype machine} há 80 pés (aproximadamente 24.3 metro
 
 \par Entretanto, o termo \textit{Side Channel Cryptanalysis} surgiu
 apenas em 1998, em um artigo~\cite{historyPaper} onde criptógrafos
-da Counterpane Systems e pesquisadores da \textit{University of California
+da \textit{Counterpane Systems} e pesquisadores da \textit{University of California
 at Berkeley} descreveram como ataques por canais laterais podem ser usados para
 quebrar sistemas de criptografia.
 
@@ -97,13 +97,13 @@ não ficou claro como extrair os bits da chave RSA.~\cite{historyMic}
 \par Desde 2018, o termo \textit{side channel attack} se popularizou
 graças à descoberta de vunerabilidades presentes na maioria dos
 processadores Intel fabricados nas últimas duas décadas, exploradas
-por SCA como Meltdown, Spectre, entre outros.
+por SCA como \textit{Meltdown}, \textit{Spectre}, entre outros.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Classificações de Side-Channel Attacks} % lucas
+\section{Classificações de Side Channel Attacks} % lucas
 
-Na classificação mais clássica de Side-Channel Attacks, temos que eles podem ser
+Na classificação mais clássica de \textit{Side Channel Attacks}, temos que eles podem ser
 classificados quanto a duas categorias:~\cite{Spreitzer2018classification,
 Standaert2010introduction, Hutle2015resilience}
 
@@ -122,8 +122,8 @@ possam obter as informações desejadas. Eles podem fazer isso, por exemplo,
 injetando vários tipos de falhas elétricas, óticas, etc.
 \end{enumerate}
 
-Além dessas classificações, pode-se classificar os side-chanell attacks em
-classes diferentes. Entre elas há:
+Além dessas classificações, pode-se classificar os \textit{side channel attacks}
+em classes diferentes. Entre elas há:
 
 \begin{itemize}
     \item \textbf{Ataques de tempo:} São o tipo de ataque mais clássico. Eles se
@@ -163,21 +163,21 @@ forem tomadas.~\cite{Hutle2015resilience}
 
     \item \textbf{Ataques eletromagnéticos:} Esses ataques se aproveitam de
 sinais eletromagnéticos que um dispositivo acaba emitindo. Um exemplo clássico
-foram os ataques TEMPEST, um dos primeiros tipos de Side Channel Attacks a serem
-estudados. Eles também podem ser divididos em \textbf{simples} e
-\textbf{diferenciais}, pois também se pode utilizar os mesmos métodos
-estatísticos que se utilizam nos ataques de análise de gasto
+foram os ataques \textit{TEMPEST}, um dos primeiros tipos de \textit{Side
+Channel Attacks} a serem estudados. Eles também podem ser divididos em
+\textbf{simples} e \textbf{diferenciais}, pois também se pode utilizar os mesmos
+métodos estatísticos que se utilizam nos ataques de análise de gasto
 energético.~\cite{Hutle2015resilience}
 
 \item \textbf{Ataques acústicos:} Eles se aproveitam de barulhos emitidos pelo
 computador para extrair informações importantes.
 
 Um exemplo bastante interessante é ouvir o barulho das teclas do teclado e
-deduzir quais foram as teclas pressionadas. Ainda em 2004, quando Machine
-Learning e Redes Neurais não eram um tema em alta, um grupo de pesquisadores da
-IBM postou um artigo mostrando que Redes Neurais poderiam ser treinadas para
-reconhecer o que foi teclado com base apenas no som captado por um
-microfone.~\cite{Asonov2004KeyboardAE}
+deduzir quais foram as teclas pressionadas. Ainda em 2004, quando
+\textit{Machine Learning} e Redes Neurais não eram um tema em alta, um grupo de
+pesquisadores da IBM postou um artigo mostrando que Redes Neurais poderiam ser
+treinadas para reconhecer o que foi teclado com base apenas no som captado por
+um microfone.~\cite{Asonov2004KeyboardAE}
 
 Outro exemplo de ataque acústico é aquele que explora os pequenos sons emitidos
 por um computador devido ao estresse mecânico causado pelo calor. Esses sons
@@ -220,15 +220,15 @@ instruções em execução.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Exemplos de Side-Channel Attacks}
+\section{Exemplos de Side Channel Attacks}
 
 \subsection{Meltdown} % lucas
 
 Meltdown é um SCA relacionado ao processador e a um efeito colateral da execução
-\textit{fora-de-ordem} feita por ele. Graças a ela, o Meltdown consegue quebrar
-a hierarquia entre o \textit{espaço do usuário} e o \textit{espaço do núcleo},
-podendo ler informações que não deveriam ser acessíveis por qualquer usuário,
-como senhas e dados pessoais.
+\textit{fora-de-ordem} feita por ele. Graças a ela, o \textit{Meltdown} consegue
+quebrar a hierarquia entre o \textit{espaço do usuário} e o \textit{espaço do
+núcleo}, podendo ler informações que não deveriam ser acessíveis por qualquer
+usuário, como senhas e dados pessoais.
 
 Atualmente, o principal mecanismo de defesa de qualquer sistema operacional é a
 \textit{isolação da memória}, dividindo a memória principal entre os diversos
@@ -279,10 +279,10 @@ Consequentemente, não há nenhuma mudança no mapeamento da memória quando mud
 do modo usuário para o modo núcleo (o que é crucial para garantir mais
 velocidade).
 
-O Meltdown explora uma vunerabilidade causa pela \textit{execução fora-de-ordem}
-para ler dados mapeados no espaço de endereço do núcleo, o que inclui a memória
-física inteira em sistemas Linux, Android e OS X e uma grande parte da memória
-física em ambientes Windows.
+O \textit{Meltdown} explora uma vunerabilidade causa pela \textit{execução
+fora-de-ordem} para ler dados mapeados no espaço de endereço do núcleo, o que
+inclui a memória física inteira em sistemas Linux, Android e OS X e uma grande
+parte da memória física em ambientes Windows.
 
 As CPUs modernas possuem essa técnica de otimização chamada de \textit{execução
 fora-de-ordem} que permite que os núcleos passem mais tempo trabalhando (menos
@@ -298,31 +298,32 @@ ter certeza disso. O desenvolvedor do algoritmo que possibilitou a
 \textit{execução fora-de-ordem} foi Tomasulo em
 1967~\cite{Tomasulo1967outoforder}.
 
-A vunerabilidade encontrada pelo Meltdown se deve ao fato de que ao tentar
-executar uma instrução de acessar uma região de memória que não pertence ao
-programa, a \textit{execução fora-de-ordem} acabará fazendo o acesso e
+A vunerabilidade encontrada pelo \textit{Meltdown} se deve ao fato de que ao
+tentar executar uma instrução de acessar uma região de memória que não pertence
+ao programa, a \textit{execução fora-de-ordem} acabará fazendo o acesso e
 armazenando o valor no \textit{cache}. Apenas depois que esse dado é armazenado
-no \textit{cache}, a CPU percebe que a instrução não deveria ser executada e
-não de fato entrega esse valor ao programa que solicitou. Contudo, como o dado
-está em cache, o programa pode fazer um \textit{ataque ao cache} para recuperar
-essa informação, acessando, portanto, uma região da memória que não pertence ao
+no \textit{cache}, a CPU percebe que a instrução não deveria ser executada e não
+de fato entrega esse valor ao programa que solicitou. Contudo, como o dado está
+em cache, o programa pode fazer um \textit{ataque ao cache} para recuperar essa
+informação, acessando, portanto, uma região da memória que não pertence ao
 programa atacante.
 
-Todo processor Intel feito desde 1995 (exceto o Intel Itanium e Intel Atom)
-implementa \textit{execuções fora-de-ordem} e, portanto, está suscetível. Além
-disso, é bastante difícil de detectar se um computador está sendo explorado pelo
-Meltdown, pois ele é um ataque a nível de CPU. Entretanto, nunca se teve
-notícias de computadores infectados, o que significa que, embora possível, o
-ataque é bastante difícil de se implementar na prática. Ademais, existem
-atualizações para Linux, Windows e OS X contra o Meltdown.
+Todo processor Intel feito desde 1995 (exceto o \textit{Intel Itanium} e
+\textit{Intel Atom}) implementa \textit{execuções fora-de-ordem} e, portanto,
+está suscetível. Além disso, é bastante difícil de detectar se um computador
+está sendo explorado pelo \textit{Meltdown}, pois ele é um ataque a nível de
+CPU. Entretanto, nunca se teve notícias de computadores infectados, o que
+significa que, embora possível, o ataque é bastante difícil de se implementar na
+prática. Ademais, existem atualizações para Linux, Windows e OS X contra o
+\textit{Meltdown}.
 
 \subsection{Spectre} % leo
-Spectre é uma classe de ataques que explora execução fora de ordem para vazar
-dados dos buffer microarquiteturais, sendo capaz de escolher as instruções
-que serão executadas e utilizá-las como um canal secreto para vazar os dados
-da memória do processo alvo.
+\textit{Spectre} é uma classe de ataques que explora execução fora de ordem para
+vazar dados dos buffer microarquiteturais, sendo capaz de escolher as instruções
+que serão executadas e utilizá-las como um canal secreto para vazar os dados da
+memória do processo alvo.
 
-A primeira variante do Spectre ataca a predição de \emph{branches}
+A primeira variante do \textit{Spectre} ataca a predição de \emph{branches}
 condicionais, treinando o preditor para executar a \emph{branch} errada.
 Ele faz isso executando uma condição com entradas válidas várias vezes, e
 então a executando com uma entrada inválida. Assim, o preditor fará com que o
@@ -352,9 +353,9 @@ Amostragem de Dados Microarquitetural, capaz de evitar as medidas de segurança
 contra MDSs dos processadores da Intel. Este ataque é capaz de vazar dados
 atravéz de barreiras de segurança como o isolamento de mémoria entre processos,
 entre \emph{user/kernel spaces}, \emph{SGX enclaves} e máquinas virtuais.
-Ao causar contenção de linhas de cache, CacheOut causa a expulsão de dados do
-cache e lê estes dados dos LFBs com um ataque TAA, conseguindo vazar páginas
-inteiras de memória.~\cite{schaik2020cacheout}
+Ao causar contenção de linhas de cache, \textit{CacheOut} causa a expulsão de
+dados do cache e lê estes dados dos LFBs com um ataque TAA, conseguindo vazar
+páginas inteiras de memória.~\cite{schaik2020cacheout}
 
 \subsubsection{Line Fill Buffers}
 \emph{Line Fill Buffers} (LFBs) são \emph{buffers} microarquiteturais usados
@@ -362,7 +363,7 @@ para armazenar dados durante acessos ao cache L1, tratando de pedidos ao
 cache em \emph{cache misses} e temporariamente armazenando dados em acessos
 à memória e operações de I/O. Também podem ser usados em \emph{cache hits}
 e para encaminhar dados para operações de leitura e escrita no
-cache.~\cite{IntelMDS}
+\emph{cache}.~\cite{IntelMDS}
 
 \subsubsection{Transactional Synchronization Extensions}
 \emph{Transactional Synchronization Extensions} (TSX) é uma implementação de
@@ -382,28 +383,28 @@ permitindo a amostragem desses dados.~\cite{schaik2020cacheout}
 
 \subsection{ZombieLoad} % julia
 
-\par Em 14 de maio de 2019 um grupo formado por pesquisadores de
-diversas universidades, dentre elas a austríaca  Graz University of
-Technology e a belga Catholic University of Leuven, e por equipes da
- segurança Oracle, Cyberus, entre outras, juntamente com a
-Intel, reportou uma novo tipo de SCA, nomeado ZombieLoad~\cite{Schwarz2019ZombieLoad}, que explora
-vulnerabilidades presentes na maioria dos processadores Intel
-fabricados após 2011.~\cite{zombieWired}
+\par Em 14 de maio de 2019 um grupo formado por pesquisadores de diversas
+universidades, dentre elas a austríaca \textit{Graz University of Technology} e
+a belga \textit{Catholic University of Leuven}, e por equipes da segurança
+Oracle, Cyberus, entre outras, juntamente com a Intel, reportou uma novo tipo de
+SCA, nomeado \textit{ZombieLoad}~\cite{Schwarz2019ZombieLoad}, que explora
+vulnerabilidades presentes na maioria dos processadores Intel fabricados após
+2011.~\cite{zombieWired}
 
-\par O ZombieLoad, assim com o Spectre, Meltdown, Foreshadow, entre
-outros, pertence à classe dos \textit{transient-execution attacks}~\cite{canella2019systematic},
-ataques que exploram vulnerabilidades resultantes de técnicas
-utilizadas para melhorar a performance do computador, como a execução
-fora de ordem e a execução especulativa. A primeira é um  paradigma
-que permite que a CPU, ao invés de executar as microoperações de um conjunto de
-instruções sequencialmente, execute-as em paralelo, mesmo que a
-microoperação anterior não tenha sido finalizada, e as reorganize
-depois, decidindo aproveitar ou descartar os resultados.
-Já a segunda  consiste na CPU executar instruções especulativamente,
-ou seja, antes delas aparecerem na lista de instruções, utilizando
-análise do fluxo de dados e predicção de desvio, assim como na técnica
-anterior, os resultados das instruções executadas especulativamente
-podem ser aproveitados ou descartados.
+\par O \textit{ZombieLoad}, assim com o \textit{Spectre}, \textit{Meltdown},
+\textit{Foreshadow}, entre outros, pertence à classe dos
+\textit{transient-execution attacks}~\cite{canella2019systematic}, ataques que
+exploram vulnerabilidades resultantes de técnicas utilizadas para melhorar a
+performance do computador, como a execução fora de ordem e a execução
+especulativa. A primeira é um  paradigma que permite que a CPU, ao invés de
+executar as microoperações de um conjunto de instruções sequencialmente,
+execute-as em paralelo, mesmo que a microoperação anterior não tenha sido
+finalizada, e as reorganize depois, decidindo aproveitar ou descartar os
+resultados. Já a segunda  consiste na CPU executar instruções especulativamente,
+ou seja, antes delas aparecerem na lista de instruções, utilizando análise do
+fluxo de dados e predicção de desvio, assim como na técnica anterior, os
+resultados das instruções executadas especulativamente podem ser aproveitados ou
+descartados.
 
 \par Nesse caso, chamamos essa instrução executada fora de ordem ou
 especulativamente, cujo resultado foi descartado de \textit{transient
@@ -425,29 +426,30 @@ desabilitar o \textit{hyperthreading}.~\cite{cyberus}
 \subsection{Foreshadow} % julia
 
 Em 2015, a Intel incluiu um reforço de segurança nos processadores Intel x86,
-O Software Guard eXtentions (SGX). SGX é um conjunto de códigos de instruções
-relacionadas a segurança que permite ao usuário e ao sistema operacional
-definir regiões privadas da memória, com isolamento reforçado por hardware, chamadas enclaves, cujo conteúdo não
-pode ser lido ou salvo por qualquer processo fora do
-próprio enclave.~\cite{IntelSGX}.
+O \textit{Software Guard eXtentions} (SGX). SGX é um conjunto de códigos de
+instruções relacionadas a segurança que permite ao usuário e ao sistema
+operacional definir regiões privadas da memória, com isolamento reforçado por
+hardware, chamadas enclaves, cujo conteúdo não pode ser lido ou salvo por
+qualquer processo fora do próprio enclave.~\cite{IntelSGX}.
 
-Em 2018, contudo, um novo SCA, chamado de Foreshadow pelos cientistas que
-descobriram, rompeu com a convicção sobre a segurança do SGX. Esse ataque,
-denominado L1 Terminal Fault (L1TF) pela Intel, explora uma vulnerabilidade
-na execução especulativa, a mesma explorada pelo Meltdown, permitindo ao
-atacante extrair segredos do enclave enquanto estão no cache L1 sem fazer
-suposições sobre o código enclave da vítima e sem precisar de acesso ao
-kernel. Além disso, a ``versão básica'' do ataque não necessita de acesso
-ao usuário \textit{root}.~\cite{vanbulck2018foreshadow}
+Em 2018, contudo, um novo SCA, chamado de \textit{Foreshadow} pelos cientistas
+que descobriram, rompeu com a convicção sobre a segurança do SGX. Esse ataque,
+denominado \textit{L1 Terminal Fault} (L1TF) pela Intel, explora uma
+vulnerabilidade na execução especulativa, a mesma explorada pelo
+\textit{Meltdown}, permitindo ao atacante extrair segredos do enclave enquanto
+estão no cache L1 sem fazer suposições sobre o código enclave da vítima e sem
+precisar de acesso ao \emph{kernel}. Além disso, a ``versão básica'' do ataque
+não necessita de acesso ao usuário
+\textit{root}.~\cite{vanbulck2018foreshadow}.
 
-Esse ataque consiste em trazer o dado do enclave para o cache L1, passo
+Esse ataque consiste em trazer o dado do enclave para o \emph{cache L1}, passo
 desnecessário se houver acesso ao usuário \textit{root}, depois, os dados
 do enclave presentes na L1 são extraídos em uma execução especulativa, antes
 que a CPU perceba que o processo não tem permissão para acessar tais dados e
 cancele a operação.
 
 As mitigações em microcódigo liberadas pela Intel são capazes de proteger
-o processador contra o Foreshadow, contudo há impacto na performance
+o processador contra o \textit{Foreshadow}, contudo há impacto na performance
 de \textit{cloud computing}.
 
 \newpage
@@ -455,6 +457,33 @@ de \textit{cloud computing}.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Conclusão}
+
+A conclusão do grupo foi que apesar de potenciais danos, a grande maioria dos
+\textit{Side Channel Attacks} não representam significativa ameaça para a maior
+parte dos usuários domésticos. Grandes empresas como a Intel e AMD precisam
+urgentemente corrigir as falhas exploradas por SCA como a execução fora-de-ordem
+e especulativa, pois muitos serviços grandes (principalmente serviços em nuvem)
+estão vulneráveis a ataques.
+
+Contudo, o usuário doméstico dificilmente seria alvo de ataques, pois eles são
+muito difíceis de se executar e, em muitos casos, precisam de acesso físico à
+máquina da vítima ou de informações que não são fáceis de serem obtidas.
+
+Ainda assim, o estudo de \textit{Side Channel Attacks} é bastante relevante,
+pois revela uma série de vulnerabilidades não óbvias que mecanismos possuem.
+Ficou destacado o fato de que existem potencialmente centenas ou milhares de
+formas de explorar tais vulnerabilidades, mas que um usuário comum não precisa
+ficar alarmado com tal situação, pois ele dificilmente será alvo de um ataque
+assim, dado que eles são extremamente individualizados e customizados para
+atingir uma vítima em específico. Assim sendo, eles se tornam ou muito caros ou
+muito trabalhosos e não valem a pena para grandes \textit{crackers} que procuram
+vulnerabilidades facilmente exploráveis e com potencial de atigir várias vítimas
+de uma só vez.
+
+Portanto, apenas grandes empresas e governos devem tomar cuidados tão
+específicos, pois eles sim podem ser alvos de SCAs. E as empresas criadoras de
+peças de computador devem tomar um certo cuidado para não criar mecanismos
+extremamente fáceis de serem explorados.
 
 \newpage
 
